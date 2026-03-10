@@ -3,8 +3,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (loginForm) {
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            // In a real app, you'd validate credentials here
+            const username = document.getElementById('username').value;
             localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('username', username);
             window.location.href = '../MAIN-WEBSITE/MainPage.html';
         });
     }
