@@ -228,19 +228,41 @@ function deleteTask(btn) {
 // Login/Logout Logic
 window.addEventListener('load', function() {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
+    const username = localStorage.getItem('username');
     const logoutLink = document.getElementById('logoutLink');
     const loginLink = document.getElementById('loginLink');
+    const welcomeMessage = document.getElementById('welcomeMessage');
+    const userNameDisplay = document.getElementById('userNameDisplay');
+    const heroBtn = document.getElementById('heroBtn');
     
     if (isLoggedIn === 'true') {
         if (logoutLink) logoutLink.style.display = 'block';
         if (loginLink) loginLink.style.display = 'none';
+        if (welcomeMessage) {
+            welcomeMessage.style.display = 'flex';
+            welcomeMessage.style.alignItems = 'center';
+            welcomeMessage.style.gap = '8px';
+            if (userNameDisplay) userNameDisplay.innerText = username || 'User';
+        }
+        if (heroBtn) {
+            heroBtn.innerText = 'Explore Routine';
+            heroBtn.onclick = showRoutine;
+            heroBtn.href = 'javascript:void(0)';
+        }
     } else {
         if (logoutLink) logoutLink.style.display = 'none';
         if (loginLink) loginLink.style.display = 'block';
+        if (welcomeMessage) welcomeMessage.style.display = 'none';
+        if (heroBtn) {
+            heroBtn.innerText = 'Get Started Now';
+            heroBtn.onclick = null;
+            heroBtn.href = '../LOGIN-CODE/Login.html';
+        }
     }
 });
 
 function logout() {
     localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('username');
     window.location.href = '../LOGIN-CODE/Login.html';
 }
